@@ -19,4 +19,11 @@
 - get_scheduler: returns StepLR scheduler for changing learning after pre-defined number of epochs
 - getlossCriterion: returns CrossEntropy Loss
 
+<br>
+
+## Model.py: 
+- Has the network architecture definitions for classification task having CNN network as backbone with couple of MLP layers for classification towards the end <br>
+![image.png](attachment:8ec4d8da-cfbc-4d1e-a231-7dba6940f097.png)
+
+
 
