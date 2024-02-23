@@ -5,48 +5,6 @@ from matplotlib import pyplot as plt
 from tqdm import tqdm
 
 
-def get_tfms(type: str) -> transforms:
-    if type == "train":
-        # Train data transformations
-        tfm = transforms.Compose(
-            [
-                transforms.RandomApply(
-                    [
-                        transforms.CenterCrop(22),
-                    ],
-                    p=0.1,
-                ),
-                transforms.Resize((28, 28)),
-                transforms.RandomRotation((-15.0, 15.0), fill=0),
-                transforms.ToTensor(),
-                transforms.Normalize((0.1307,), (0.3081,)),
-            ]
-        )
-    else:
-        # Test data transformations
-        tfm = transforms.Compose(
-            [
-                transforms.ToTensor(),
-                transforms.Normalize((0.1307,), (0.3081,)),
-            ]
-        )
-    return tfm
-
-
-def get_ds(type: str, tfms, download=True):
-    if type == "train":
-        ds = datasets.MNIST("../data", train=True, download=download, transform=tfms)
-    else:
-        ds = datasets.MNIST("../data", train=False, download=download, transform=tfms)
-    return ds
-
-
-def get_dls(train_ds, test_ds, **kwargs):
-    train_dl = torch.utils.data.DataLoader(train_ds, **kwargs)
-    test_dl = torch.utils.data.DataLoader(test_ds, **kwargs)
-    return train_dl, test_dl
-
-
 def GetCorrectPredCount(pPrediction, pLabels):
     return pPrediction.argmax(dim=1).eq(pLabels).sum().item()
 
@@ -127,24 +85,6 @@ def plot_acc_loss(train_losses, train_acc, test_losses, test_acc):
     axs[1, 1].plot(test_acc)
     axs[1, 1].set_title("Test Accuracy")
 
-def show_dls_samples(dataloader):
-    batch_data, batch_label = next(iter(dataloader))
 
-    fig = plt.figure()
 
-    for i in range(12):
-        plt.subplot(3, 4, i + 1)
-        plt.tight_layout()
-        plt.imshow(batch_data[i].squeeze(0), cmap='gray')
-        plt.title(batch_label[i].item())
-        plt.xticks([])
-        plt.yticks([])
 
-def get_optimizer(params, lr=4e-3, momentum=0.9):
-    return optim.SGD(params, lr=lr, momentum=momentum)
-
-def get_scheduler(optimizer, step_size=15, gamma=0.1, verbose=True):
-    return optim.lr_scheduler.StepLR(optimizer, step_size=step_size, gamma=gamma, verbose=verbose)
-
-def getlossCriterion():
-    return torch.nn.CrossEntropyLoss(reduction='mean')
