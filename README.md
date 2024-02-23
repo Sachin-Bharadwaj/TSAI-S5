@@ -23,7 +23,13 @@
 
 ## Model.py: 
 - Has the network architecture definitions for classification task having CNN network as backbone with couple of MLP layers for classification towards the end <br>
-![image.png](attachment:8ec4d8da-cfbc-4d1e-a231-7dba6940f097.png)
+<img width="358" alt="image" src="https://github.com/Sachin-Bharadwaj/TSAI-S5/assets/26499326/28d02fef-d14a-4910-bb50-351cd2058c2b">
+<br>
+
+## Model Performance
+<img width="825" alt="image" src="https://github.com/Sachin-Bharadwaj/TSAI-S5/assets/26499326/e41ad129-a26b-4436-8935-f6a654179d6b">
+
+
 
 
 
